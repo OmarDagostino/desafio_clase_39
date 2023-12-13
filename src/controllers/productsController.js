@@ -19,9 +19,7 @@ async function getProducts (req, res) {
     const filter = {}; 
     if (req.session.usuario.typeofuser!=='admin') {
       filter.owner = req.session.usuario.email
-    } else {
-      filter.owner = ''
-    }
+    } 
     if (req.query.category) {
       filter.category = req.query.category; 
     }
@@ -56,7 +54,7 @@ async function getProducts (req, res) {
       nextLink: nextPage ? `/products?page=${nextPage}&limit=${limit}&sort=${sortOrder}&query=${query}` : null,
     };
 
-    res.json(response);
+    res.status(200).json(response);
   } catch (error) {
     if (customStatusCode===500) {
       let error = CustomError.createCustomError(16);
@@ -80,7 +78,7 @@ async function getProductById (req, res) {
       } else {
         const product = await productServices.obtenerProducto(productId);
         if (product) {
-          res.json(product);
+          res.status(200).json(product);
         } else {
           let error = CustomError.createCustomError(5);
           customStatusCode=error.codigo;

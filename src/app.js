@@ -53,7 +53,7 @@ const server = app.listen(PORT, () => {
 
 const swaggerOptions = {
   definition : {
-    openai : '1.0.0',
+    openapi : '3.0.0',
     info: {
       title:"documentación de los modulos de productos y de carrito",
       description:"Api de comercio electrónico - Back-end - "
